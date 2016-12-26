@@ -11,7 +11,6 @@
 
   if(PRODUCTION){
       ini_set('display_errors', '1');
-      // ini_set('error_reporting', E_ERROR | E_WARNING | E_NOTICE); //error_reporting(E_ALL) ;
       ini_set('error_reporting', E_ERROR | E_WARNING ); //error_reporting(E_ALL) ;
 	}else{
   		ini_set('display_errors', '0');
@@ -20,6 +19,12 @@
 
   session_start();
   $_SESSION['module'] = "";
+
+  $filter = inputfilter::getInstance();
+  $_POST = json_decode(file_get_contents('php://input'), true);
+  $_POST = $filter->process($_POST);
+  $_GET = $filter->process($_GET);
+
   function handlerRouter(){
       if(!empty($_GET['module'])){
           $URI_module = $_GET['module'];
@@ -32,14 +37,13 @@
       }else{
           $URI_function = 'begin';
       }
-      // echo "M:".$URI_module." F:".$URI_function;
       handlermodule($URI_module, $URI_function);
   }//End handleRouter
 
   function handlerModule($URI_module, $URI_function) {
 	    $modules = simplexml_load_file('resources/modules.xml');
 	    $exist = false;
-      // echo "hola";
+
 	    foreach ($modules->module as $module) {
 
 	        if (($URI_module === (String)$module->uri)) {
@@ -55,7 +59,7 @@
   					$obj = new $controllerClass;
             // echo $obj;
   				} else {
-            handlerModule('main', 'begin');
+            echo json_encode($obj['error']=404);
   				}
           // echo $controllerClass.$URI_function ;
 	        handlerFunction(((String)$module->name), $obj, $URI_function);
@@ -63,7 +67,7 @@
 	        }
 	    }
 	    if (!$exist) {
-          handlerModule('main', 'begin');
+          echo json_encode($obj['error']=404);
 	    }
 	}//End handleModule
 
@@ -79,7 +83,7 @@
           }
       }
       if(!$exist){
-        handlerModule('main', 'begin');
+        echo json_encode($obj['error']=404);
       }else{
         call_user_func(array($obj, $event));
       }
