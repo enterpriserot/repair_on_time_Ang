@@ -1,4 +1,5 @@
-var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngCookies']);
+var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap']);//,'ngCookies'
+// var app = angular.module('myApp', ['ngRoute', 'ui.bootstrap', 'ngCookies', 'ui.map', 'ui.event', 'facebook','lazy-scroll']);
 
 app.config(['$routeProvider',
     function ($routeProvider) {
@@ -15,8 +16,8 @@ app.config(['$routeProvider',
                 // .when("/terminos", {templateUrl: "frontend/modules/main/view/terminos.view.html", controller: "mainCtrl"})
                 // .when("/politica", {templateUrl: "frontend/modules/main/view/politica.view.html", controller: "mainCtrl"})
                 //
-                // // Contact
-                // .when("/contact", {templateUrl: "frontend/modules/contact/view/contact.view.html", controller: "contactCtrl"})
+                // Contact
+                .when("/contact", {templateUrl: "frontend/modules/contact/view/contact.view.html", controller: "contactCtrl"})
                 //
                 // // Ofertas
                 // .when("/ofertas", {

@@ -4,8 +4,14 @@
 /*Font logo principal*/
 @font-face{
     font-family: "bttf";
-    src: url('bttf.ttf'),
-    url('Thonburi-Bold.eot'); /* IE */
+    src: url('../fonts/bttf.ttf');
+    /*url('Thonburi-Bold.eot');*/ /* IE */
+}
+
+@font-face{
+    font-family: "rot";
+    src: url('../fonts/logo.ttf');
+    /*url('Thonburi-Bold.eot');*/ /* IE */
 }
 
 html,
@@ -204,6 +210,15 @@ footer {
 
 
 @media(min-width:768px) {
+    #topNav{
+      background-color: #da521b;
+    }
+
+    #logo{
+      font-family: 'rot';
+      font-size: 30px;
+    }
+
     .navbar-default {
         border-color: transparent;
         background-color: transparent;
