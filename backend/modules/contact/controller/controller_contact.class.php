@@ -16,7 +16,6 @@
     public function process_contact(){
 
       if($_POST['token'] === "contact_form"){
-        // echo $_POST['inputMessage'];
         /////Email send to the user
         $arrArgument = array(
             'type' => 'contact',

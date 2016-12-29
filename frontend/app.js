@@ -7,7 +7,7 @@ app.config(['$routeProvider',
                 // Home
                 .when("/", {templateUrl: "frontend/modules/main/view/main.view.html", controller: 'mainCtrl'})
 
-                // //cookies
+                //cookies
                 .when("/cookies", {templateUrl: "frontend/modules/cookies/view/cookies.view.html", controller: 'cookiesCtrl'})
 
                 // // Pages

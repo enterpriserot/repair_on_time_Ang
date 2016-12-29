@@ -1,0 +1,8 @@
+;Configuration ini file class email
+email = enterpriserot@gmail.com
+pass = toni&david
+secure = ssl
+auth = true
+host = smtp.gmail.com
+port = 465
+defaultsubject = REPAIR_ON_TIME

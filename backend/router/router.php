@@ -2,12 +2,12 @@
   require_once("paths.php");
   require 'autoload.php';
 
+  require UTILS . "response_code.inc.php";
   include(UTILS . "filters.inc.php");
   include(UTILS . "utils.inc.php");
-  include(UTILS . "response_code.inc.php");
   include(UTILS . "common.inc.php");
   include(UTILS . "mail.inc.php");
-  include LOG_DIR;
+  include GENERAL_LOG_DIR;
 
   if(PRODUCTION){
       ini_set('display_errors', '1');

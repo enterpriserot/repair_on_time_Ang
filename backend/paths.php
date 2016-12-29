@@ -9,7 +9,7 @@ define('SITE_ROOT', $_SERVER['DOCUMENT_ROOT'] . PROJECT);
 define('SITE_PATH', '//'.$_SERVER['HTTP_HOST'] . PROJECT);
 
 //LOG
-define('GENERAL_LOG_DIR', SITE_ROOT . 'log/general/Site_General_errors.log');
+define('GENERAL_LOG_DIR', SITE_ROOT . '/log/general/Site_General_errors.log');
 
 //PRODUCTION
 define('PRODUCTION', true);
@@ -39,9 +39,9 @@ define('LIBS', SITE_ROOT . '/libs/');
 //CLASSES
 define('CLASSES', SITE_ROOT . '/classes/');
 
-//MODEL USERS
-define('UTILS_USERS', SITE_ROOT . '/modules/users/utils/');
-define('MODEL_USERS', SITE_ROOT . '/modules/users/model/model/');
-
-//MODEL TECHNICIANS
-define('MODEL_TECHNICIANS', SITE_ROOT . '/modules/technicians/model/model/');
+// //MODEL USERS
+// define('UTILS_USERS', SITE_ROOT . '/modules/users/utils/');
+// define('MODEL_USERS', SITE_ROOT . '/modules/users/model/model/');
+//
+// //MODEL TECHNICIANS
+// define('MODEL_TECHNICIANS', SITE_ROOT . '/modules/technicians/model/model/');

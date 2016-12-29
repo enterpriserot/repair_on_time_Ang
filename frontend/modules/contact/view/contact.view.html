@@ -5,14 +5,11 @@
         <div class="control-group">
             <input required ng-model="contact.inputName" type="text" id="inputName" name="inputName" placeholder="Name"
             class="input-block-level" dir="auto" maxlength="100">
-            <span class="text-danger" ng-show="contact_form.inputName.$error.required && (conytact_form.inputNAme.$dirty
-            || contact_form.inputName.$touched)">This field is required</span>
+            <span class="text-danger" ng-show="contact_form.inputName.$error.required && (contact_form.inputName.$dirty || contact_form.inputName.$touched)">This field is required</span>
         </div>
         <div class="control-group">
-            <input required ng-model="contact.inputEmail" type="email" id="inputEmail" name="inputEmail" placeholder="Email *"
-            class="input-block-level" maxlength="100" ng-pattern="/^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*$/i">
-            <span class="text-danger" ng-show="contact_form.inputEmail.$error.required && (contact_form.inputEmail.$dirty ||
-            contact_form.inputEmail.$touched)">This field is required</span>
+            <input required ng-model="contact.inputEmail" type="email" id="inputEmail" name="inputEmail" placeholder="Email *" class="input-block-level" maxlength="100" ng-pattern="/^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*$/i">
+            <span class="text-danger" ng-show="contact_form.inputEmail.$error.required && (contact_form.inputEmail.$dirty || contact_form.inputEmail.$touched)">This field is required</span>
             <span class="text-danger" ng-show="contact_form.inputEmail.$error.email">Invalid Email</span>
         </div>
         <div class="control-group">
@@ -29,15 +26,17 @@
             </select>
         </div>
         <div class="control-group">
-              <textarea required ng-model="contact.inputMessage" class="input-block-level" rows="4" name="inputMessage"
-              placeholder="Input your message..." dir="auto"></textarea>
-              <span class="text-danger" ng-show="contact_form.inputMessage.$error.required &&
-                (contact_form.inputMessage.$dirty || contact_form.inputMessage.$touched)">This field is required</span>
+              <textarea required ng-model="contact.inputMessage" class="input-block-level" rows="4" name="inputMessage" placeholder="Input your message..." dir="auto"></textarea>
+              <span class="text-danger" ng-show="contact_form.inputMessage.$error.required && (contact_form.inputMessage.$dirty || contact_form.inputMessage.$touched)">This field is required</span>
         </div>
 
         <input type="hidden" name="token" value="contact_form" />
 
-        <input class="btn btn-primary" type="submit" name="submit" id="submitBtn" disabled="disabled" value="send" />
+        <input type="submit" name="submit" id="submitBtn" value="Send" ng-show="contact_form.inputName.$valid && contact_form.inputEmail.$valid && contact_form.inputMessage.$valid" ng-click="SubmitContact()"/>
+
+        <!-- <input class="btn btn-primary" type="submit" name="submit" id="submitBtn" disabled="disabled" value="Send"
+        ng-show="contact_form.inputName.$valid && contact_form.inputEmail.$valid && contact_form.inputMessage.$valid"
+               ng-click="SubmitContact()"/> -->
 
         <!-- <img src="<?php echo CONTACT_IMG_PATH ?>ajax-loader.gif" alt="ajax loader icon" class="ajaxLoader" /><br/><br/> -->
 
