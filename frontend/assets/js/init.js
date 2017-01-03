@@ -5,7 +5,7 @@
 */
 
 (function($) {
-var project='/proj_final_AngularJS/JoinElderly';
+var project='/repair_on_time_Ang';
 	skel.init({
 		reset: 'full',
 		breakpoints: {

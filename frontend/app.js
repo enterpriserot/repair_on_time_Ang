@@ -1,14 +1,14 @@
-var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap']);//,'ngCookies'
+var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngCookies']);
 // var app = angular.module('myApp', ['ngRoute', 'ui.bootstrap', 'ngCookies', 'ui.map', 'ui.event', 'facebook','lazy-scroll']);
 
 app.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider
                 // Home
-                .when("/", {templateUrl: "frontend/modules/main/view/main.view.html", controller: 'mainCtrl'})
+                .when("/", {templateUrl: "frontend/modules/main/view/main.view.html", controller: "mainCtrl"})
 
                 //cookies
-                .when("/cookies", {templateUrl: "frontend/modules/cookies/view/cookies.view.html", controller: 'cookiesCtrl'})
+                .when("/cookies", {templateUrl: "frontend/modules/cookies/view/cookies.view.html", controller: "cookiesCtrl"})
 
                 // // Pages
                 // .when("/trabaja", {templateUrl: "frontend/modules/main/view/trabaja.view.html", controller: "mainCtrl"})

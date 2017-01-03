@@ -28,8 +28,9 @@
   <body>
     <div ng-include='"frontend/assets/includes/menu.view.html"'></div>
     <div ng-view></div>
-    <div ng-include='"frontend/assets/includes/footer.view.html"'></div>
     <div ng-include='"frontend/assets/includes/accept_cookies.view.html"'></div>
+    <div ng-include='"frontend/assets/includes/footer.view.html"'></div>
+
 
 
     <!-- <script type="text/javascript" src="<?php echo USERS_JS_PATH?>init.js"></script> -->
@@ -39,17 +40,26 @@
     <!-- <script type="text/javascript" src="frontend/assets/js/jquery.prettyPhoto.js"></script> -->
     <!-- <script type="text/javascript" src="frontend/assets/js/custom.js"></script> -->
                                   <!-- / ANGULAR / -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.min.js"></script>
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.min.js"></script> -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular-route.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular-animate.min.js" ></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular-cookies.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.min.js"></script>
                                   <!-- / APP / -->
     <script src="frontend/app.js"></script>
     <script src="frontend/apiconnector.js"></script>
     <script src="frontend/common.service.js"></script>
+
     <script src="frontend/modules/contact/controller/contact.controller.js"></script>
     <script src="frontend/modules/main/controller/main.controller.js"></script>
     <script src="frontend/modules/cookies/controller/cookies.controller.js"></script>
     <script src="frontend/modules/cookies/services/accept_cookies.services.js"></script>
     <script src="frontend/modules/cookies/services/localstorage_acceptcookies.services.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.min.js"></script>
+    <script src="frontend/modules/users/controller/users.controller.js"></script>
+    <script src="frontend/modules/users/services/users.service.js"></script>
+    <script src="frontend/modules/users/directives/users.directives.js"></script>
+    <!-- <script src="frontend/modules/users/services/load_selects.services.js"></script> -->
+    <script src="frontend/modules/users/services/cookies.services.js"></script>
+    <script src="frontend/modules/users/services/localstorage.services.js"></script>
+    <script src="frontend/modules/users/services/social.services.js"></script>
