@@ -1,5 +1,5 @@
 <?php
- 
+
 /** @class: InputFilter (PHP4 & PHP5, with comments)
  * @project: PHP Input Filter
  * @date: 10-05-2005
@@ -11,7 +11,7 @@
  * @license: GNU General Public License (GPL)
  */
 class inputfilter {
- 
+
     private static $instance;
     var $tagsArray;   // default = empty array
     var $attrArray;   // default = empty array
@@ -20,13 +20,13 @@ class inputfilter {
     var $xssAuto;           // default = 1
     var $tagBlacklist = array('applet', 'body', 'bgsound', 'base', 'basefont', 'embed', 'frame', 'frameset', 'head', 'html', 'id', 'iframe', 'ilayer', 'layer', 'link', 'meta', 'name', 'object', 'script', 'style', 'title', 'xml');
     var $attrBlacklist = array('action', 'background', 'codebase', 'dynsrc', 'lowsrc');  // also will strip ALL event handlers
- 
+
     public static function getInstance() {
         if (!(self::$instance instanceof self))
             self::$instance = new self();
         return self::$instance;
     }
- 
+
     /**
      * Constructor for inputFilter class. Only first parameter is required.
      * @access constructor
@@ -49,7 +49,7 @@ class inputfilter {
         $this->attrMethod = $attrMethod;
         $this->xssAuto = $xssAuto;
     }
- 
+
     /**
      * Method to be called by another php script. Processes for XSS and specified bad code.
      * @access public
@@ -72,7 +72,7 @@ class inputfilter {
         } else
             return $source;
     }
- 
+
     /**
      * Internal method to iteratively remove all unwanted tags and attributes
      * @access protected
@@ -88,7 +88,7 @@ class inputfilter {
         }
         return $source;
     }
- 
+
     /**
      * Internal method to strip a string of certain tags
      * @access protected
@@ -200,7 +200,7 @@ class inputfilter {
         $preTag .= $postTag;
         return $preTag;
     }
- 
+
     /**
      * Internal method to strip a tag of certain attributes
      * @access protected
@@ -243,7 +243,7 @@ class inputfilter {
                     (strpos(strtolower($attrSubSet[1]), 'livescript:') !== false)
             )
                 continue;
- 
+
             // if matches user defined array
             $attrFound = in_array(strtolower($attrSubSet[0]), $this->attrArray);
             // keep this attr on condition
@@ -261,7 +261,7 @@ class inputfilter {
         }
         return $newSet;
     }
- 
+
     /**
      * Try to convert to plaintext
      * @access protected
@@ -272,12 +272,20 @@ class inputfilter {
         // url decode
         $source = html_entity_decode($source, ENT_QUOTES, "ISO-8859-1");
         // convert decimal
-        $source = preg_replace('/&#(\d+);/me', "chr(\\1)", $source);    // decimal notation
+        // $source = preg_replace('/&#(\d+);/m', "chr(\\1)", $source);    // decimal notation
+        $source = preg_replace_callback('/&#(\d+);/m',
+            function($matches) { return $this->chr($matches[1]); },
+            $source
+        );
         // convert hex
-        $source = preg_replace('/&#x([a-f0-9]+);/mei', "chr(0x\\1)", $source); // hex notation
+        // $source = preg_replace('/&#x([a-f0-9]+);/mi', "chr(0x\\1)", $source); // hex notation
+        $source = preg_replace_callback('/&#x([a-f0-9]+);/mi',
+            function($matches) { return $this->chr($matches[1]); },
+            $source
+        );
         return $source;
     }
- 
+
     /**
      * Method to be called by another php script. Processes for SQL injection
      * @access public
@@ -301,7 +309,7 @@ class inputfilter {
         } else
             return $source;
     }
- 
+
     /**
      * @author Chris Tobin
      * @author Daniel Morris
@@ -319,5 +327,5 @@ class inputfilter {
         $source = $mysqli->escapeString($source);
         return $source;
     }
- 
+
 }
