@@ -279,7 +279,7 @@ footer {
 }
 
 header {
-    position: relative;
+    /*position: relative;*/
     min-height: auto;
     text-align: center;
     color: #fff;
@@ -342,6 +342,16 @@ header .header-content .inner p {
 
 footer {
     background-color:#2d2d2d;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#overbox3{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: auto;
 }
 
 @media(min-width:768px) {
