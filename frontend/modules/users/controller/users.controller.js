@@ -1,12 +1,12 @@
 app.controller('menuCtrl', function ($scope, $uibModal, UserService, $rootScope, $anchorScroll) {
-    UserService.login();
+    // UserService.login();
     $rootScope.bannerV = false;
     $rootScope.bannerText = "";
 
     $scope.open = function () {
         var modalInstance = $uibModal.open({
             animation: 'true',
-            templateUrl: 'frontend/modules/user/view/modal.view.html',
+            templateUrl: 'frontend/modules/users/view/modal.view.html',
             controller: 'modalWindowCtrl',
             size: "lg"
         });
@@ -41,7 +41,7 @@ app.controller('modalWindowCtrl', function ($scope, $uibModalInstance, services,
         var data = {"usuario": $scope.form.user, "pass": $scope.form.pass};
         data = JSON.stringify(data);
 
-        services.post("user", "login", data).then(function (response) {
+        services.post("users", "login", data).then(function (response) {
             //console.log(response);
             //console.log(response[0].usuario);
             if (!response.error) {

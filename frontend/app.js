@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'video-background']);
+var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'video-background', 'facebook']);
 // var app = angular.module('myApp', ['ngRoute', 'ui.bootstrap', 'ngCookies', 'ui.map', 'ui.event', 'facebook','lazy-scroll']);
 
 app.config(['$routeProvider',
@@ -40,29 +40,29 @@ app.config(['$routeProvider',
                 // })
                 //
                 // //Signup
-                // .when("/user/alta/", {
+                // .when("/users/alta/", {
                 //     templateUrl: "frontend/modules/user/view/signup.view.html",
                 //     controller: "signupCtrl"
                 // })
                 // //Activar Usuario
-                // .when("/user/activar/:token", {
+                // .when("/users/activar/:token", {
                 //     templateUrl: "frontend/modules/main/view/main.view.html",
                 //     controller: "verifyCtrl"
                 // })
                 //
                 // //Restore
-                // .when("/user/recuperar", {
+                // .when("/users/recuperar", {
                 //     templateUrl: "frontend/modules/user/view/restore.view.html",
                 //     controller: "restoreCtrl"
                 // })
                 // //ChangePass
-                // .when("/user/cambiarpass/:token", {
+                // .when("/users/cambiarpass/:token", {
                 //     templateUrl: "frontend/modules/user/view/changepass.view.html",
                 //     controller: "changepassCtrl"
                 // })
                 //
                 // //Perfil
-                // .when("/user/profile/", {
+                // .when("/users/profile/", {
                 //     templateUrl: "frontend/modules/user/view/profile.view.html",
                 //     controller: "profileCtrl",
                 //     resolve: {
@@ -104,10 +104,10 @@ app.config(['$routeProvider',
                 .otherwise("/", {templateUrl: "frontend/modules/main/view/main.view.html", controller: "mainCtrl"});
     }]);
 
-// app.config([
-//     'FacebookProvider',
-//     function (FacebookProvider) {
-//         var myAppId = '679649702209590';
-//         FacebookProvider.init(myAppId);
-//     }
-// ]);
+app.config([
+    'FacebookProvider',
+    function (FacebookProvider) {
+        var myAppId = '679649702209590';
+        FacebookProvider.init(myAppId);
+    }
+]);

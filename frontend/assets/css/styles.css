@@ -345,6 +345,7 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    height: 145px;
 }
 
 #overbox3{
@@ -352,6 +353,7 @@ footer {
   bottom: 0;
   width: 100%;
   z-index: auto;
+  background-color: #da521b;
 }
 
 @media(min-width:768px) {

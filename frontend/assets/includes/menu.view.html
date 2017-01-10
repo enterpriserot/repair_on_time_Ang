@@ -18,9 +18,11 @@
                   <li><a class="page-scroll" href="#/contact">Contact</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
+                <li id="opt"><a href="#/ofertas" ng-show="misofertasV">Mis ofertas</a>
+                        <a href="#/admin" ng-show="adminV">Administrar</a></li>
                 <li id="LogProf">
                     <a id="access" ng-show="accessV" href="" class="button special" ng-click="open()">Acceder</a>
-                    <a href="#/users/profile"><img id='menuImg' ng-show="profileV" src="{{avatar}}" alt="" /></a>
+                    <a href="#/users/profile"><img id="menuImg" ng-show="profileV" src="{{avatar}}" alt="" />{{name}}</a>
                 </li>
                 <li><a id="logout" ng-show="logoutV" ng-click="logout()">Log Out</a></li>
               </ul>
