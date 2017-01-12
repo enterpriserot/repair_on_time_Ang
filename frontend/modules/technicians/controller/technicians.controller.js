@@ -6,7 +6,7 @@ app.controller('techniciansCtrl', function ($scope, technicians, technicians_map
     $scope.maxSize = 5;
     $scope.currentPage = 1;
 
-    $scope.$watch('currentPage + numPerPage', update);
+    $scope.$watch('currentPage + numPerPage'/*, update*/);
 
     technicians_map.cargarmap(technicians.technicians, $scope);
 
@@ -24,11 +24,11 @@ app.controller('techniciansCtrl', function ($scope, technicians, technicians_map
             }
         }
     };
-
+/*
     function update(){
         var begin = (($scope.currentPage - 1) * $scope.numPerPage), end = begin + $scope.numPerPage;
         $scope.filteredTechnicians = $scope.tech.slice(begin, end);
-    };
+    }*/
 });
 
 app.controller('detailsCtrl', function ($scope, data, services, CommonService, cookiesService) {

@@ -21,11 +21,11 @@
                         <div class="fecha"> Fecha: {{of.fecha_inicio}} - {{of.fecha_final}}</div>
                         <div class="hora"> Hora: {{of.hora_inicio}} - {{of.hora_final}}</div>
                         <div class="precio"> Precio: {{of.precio}} €</div>
-                        <div class="details" ><a href="#/ofertas/{{of.id}}">Ver más</a></div>
+                        <div class="details" ><a href="#/technicians/{{of.id}}">Ver más</a></div>
                     </div>
                 </div>
                 <div id="pager">
-                    <uib-pagination total-items="oferta.length" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+                    <uib-pagination total-items="tech.length" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
                 </div>
             </div>
         </div>

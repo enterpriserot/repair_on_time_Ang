@@ -24,7 +24,7 @@ app.config(['$routeProvider',
                     templateUrl: "frontend/modules/technicians/view/main.view.html",
                     controller: "techniciansCtrl",
                     resolve: {
-                        ofertas: function (services) {
+                        technicians: function (services) {
                             return services.get('technicians', 'maploader');
                         }
                     }
