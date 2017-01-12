@@ -1,0 +1,33 @@
+<!-- Main -->
+<!-- <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script> -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCviZ569vHIB8lmT5PlDENQ9eLHNpNBYtc" async defer></script>
+<section id="main" class="wrapper">
+    <div class="container">
+        <header class="major">
+            <h2>Technicians</h2>
+            <p>Here you can find a technicians near to you</p>
+        </header>
+
+        Search Technicians: <input type="text" class="filtre" ng-model="filtro" ><hr>
+        <div class="image fit">
+            <div id="ubicacion"></div>
+            <!-- Se escribe un mapa con la localizacion anterior-->
+            <div id="demo">{{demo}}</div>
+            <div id="mapholder"></div>
+            <div class="ofertas" >
+                <div class="of"  ng-repeat="of in filteredOfertas| filter:filtro" id="{{of.id}}">
+                    <div ng-click="select(of.id)">
+                        <div class="desc">{{of.descripcion}}</div>
+                        <div class="fecha"> Fecha: {{of.fecha_inicio}} - {{of.fecha_final}}</div>
+                        <div class="hora"> Hora: {{of.hora_inicio}} - {{of.hora_final}}</div>
+                        <div class="precio"> Precio: {{of.precio}} €</div>
+                        <div class="details" ><a href="#/ofertas/{{of.id}}">Ver más</a></div>
+                    </div>
+                </div>
+                <div id="pager">
+                    <uib-pagination total-items="oferta.length" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

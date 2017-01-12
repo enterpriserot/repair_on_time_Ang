@@ -20,15 +20,15 @@ app.config(['$routeProvider',
                 .when("/contact", {templateUrl: "frontend/modules/contact/view/contact.view.html", controller: "contactCtrl"})
                 //
                 // // Ofertas
-                // .when("/ofertas", {
-                //     templateUrl: "frontend/modules/ofertas/view/main.view.html",
-                //     controller: "ofertasCtrl",
-                //     resolve: {
-                //         ofertas: function (services) {
-                //             return services.get('ofertas', 'maploader');
-                //         }
-                //     }
-                // })
+                .when("/technicians", {
+                    templateUrl: "frontend/modules/technicians/view/main.view.html",
+                    controller: "techniciansCtrl",
+                    resolve: {
+                        ofertas: function (services) {
+                            return services.get('technicians', 'maploader');
+                        }
+                    }
+                })
                 // .when("/ofertas/:id", {
                 //     templateUrl: "frontend/modules/ofertas/view/oferta.view.html",
                 //     controller: "detailsCtrl",
