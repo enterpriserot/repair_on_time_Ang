@@ -1,6 +1,7 @@
 <!-- Main -->
 <!-- <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script> -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCviZ569vHIB8lmT5PlDENQ9eLHNpNBYtc" async defer></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCviZ569vHIB8lmT5PlDENQ9eLHNpNBYtc" async defer></script> -->
+<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCviZ569vHIB8lmT5PlDENQ9eLHNpNBYtc&callback=initMap"></script> -->
 <section id="main" class="wrapper">
     <div class="container">
         <header class="major">
@@ -15,7 +16,7 @@
             <div id="demo">{{demo}}</div>
             <div id="mapholder"></div>
             <div class="ofertas" >
-                <div class="of"  ng-repeat="of in filteredOfertas| filter:filtro" id="{{of.id}}">
+                <div class="of"  ng-repeat="of in filteredTechnicians| filter:filtro" id="{{of.id}}">
                     <div ng-click="select(of.id)">
                         <div class="desc">{{of.descripcion}}</div>
                         <div class="fecha"> Fecha: {{of.fecha_inicio}} - {{of.fecha_final}}</div>

@@ -5,6 +5,7 @@ app.factory("services", ['$http','$q', function ($http, $q) {
         obj.get = function (module, functi) {
             var defered=$q.defer();
             var promise=defered.promise;
+            console.log("GET 1");
             $http({
                   method: 'GET',
                   url: serviceBase + module + '&function=' + functi
@@ -21,6 +22,7 @@ app.factory("services", ['$http','$q', function ($http, $q) {
         obj.get = function (module, functi, dada) {
             var defered=$q.defer();
             var promise=defered.promise;
+            console.log("GET 2");
             $http({
                   method: 'GET',
                   url: serviceBase + module + '&function=' + functi + '&param=' + dada
@@ -36,13 +38,16 @@ app.factory("services", ['$http','$q', function ($http, $q) {
         obj.get = function (module, functi, dada, dada2) {
             var defered=$q.defer();
             var promise=defered.promise;
+            console.log("GET 3 module: "+module+ " function: "+functi+ " dada: "+dada+" dada2: "+dada2);
             $http({
                   method: 'GET',
-                  url: serviceBase + module + '&function=' + functi + '&param=' + dada + '&param2=' + dada2
+                  // url: serviceBase + module + '&function=' + functi + '&param=' + dada + '&param2=' + dada2
+                  url: serviceBase + module + '&function=' + functi
               }).success(function(data, status, headers, config) {
-                 //console.log(data);
+                 console.log('GET 3 '+data);
                  defered.resolve(data);
               }).error(function(data, status, headers, config) {
+                 console.log('GET 3 error '+data);
                  defered.reject(data);
               });
             return promise;
