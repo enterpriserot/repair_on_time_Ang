@@ -40,8 +40,10 @@ define('LIBS', SITE_ROOT . '/libs/');
 define('CLASSES', SITE_ROOT . '/classes/');
 
 // //MODEL USERS
-// define('UTILS_USERS', SITE_ROOT . '/modules/users/utils/');
-// define('MODEL_USERS', SITE_ROOT . '/modules/users/model/model/');
+define('UTILS_USERS', SITE_ROOT . '/modules/users/utils/');
+define('MODEL_USERS', SITE_ROOT . '/modules/users/model/model/');
 //
 // //MODEL TECHNICIANS
-// define('MODEL_TECHNICIANS', SITE_ROOT . '/modules/technicians/model/model/');
+define('MODEL_TECHNICIANS', SITE_ROOT . '/modules/technicians/model/model/');
+
+define('IMG_LOGO',MEDIA_ROOT.'logo_rot.png');

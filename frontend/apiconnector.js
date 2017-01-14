@@ -44,10 +44,10 @@ app.factory("services", ['$http','$q', function ($http, $q) {
                   // url: serviceBase + module + '&function=' + functi + '&param=' + dada + '&param2=' + dada2
                   url: serviceBase + module + '&function=' + functi
               }).success(function(data, status, headers, config) {
-                 console.log('GET 3 '+data);
+                 console.log('GET 3 success: '+data+" status: "+status+" headers: "+headers+" config: "+config);
                  defered.resolve(data);
               }).error(function(data, status, headers, config) {
-                 console.log('GET 3 error '+data);
+                 console.log('GET 3 error: '+data);
                  defered.reject(data);
               });
             return promise;
