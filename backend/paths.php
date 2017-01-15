@@ -3,6 +3,7 @@
 define('PROJECT', '/repair_on_time_Ang/backend');
 
 //SITE_ROOT
+$path = $_SERVER['DOCUMENT_ROOT']. PROJECT ;
 define('SITE_ROOT', $_SERVER['DOCUMENT_ROOT'] . PROJECT);
 
 //SITE_PATH

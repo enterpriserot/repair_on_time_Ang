@@ -28,6 +28,7 @@ function ($rootScope) {
             $rootScope.map = map;
             for (var i = 0; i < arrArguments.length; i++) {
                 marcar(map, arrArguments[i], $rootScope);
+                console.log(arrArguments[i]);
             }
         }
 
@@ -49,7 +50,10 @@ function ($rootScope) {
         }
     }
 
+    var MARKER_PATH = '/repair_on_time_Ang/frontend/modules/technicians/view/img/';
     function marcar(map, tech, $rootScope) {
+      console.log("MARCAR");
+        var markerIcon = MARKER_PATH + 'location.png';
         var latlon = new google.maps.LatLng(tech.latitud, tech.longitud);
         var marker = new google.maps.Marker({position: latlon, map: map, title: tech.descripcion, animation: null});
 

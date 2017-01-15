@@ -25,10 +25,10 @@ app.config(['$routeProvider',
                     controller: "techniciansCtrl",
                     resolve: {
                         technicians: function (services) {
-                          // var tech = services.get('technicians', 'maploader');
-                          // console.log("RESOLVE: "+tech);
-                          // return tech;
-                            return services.get('technicians', 'maploader');
+                          var tech = services.get('technicians', 'maploader');
+                          console.log(tech);
+                          return tech;
+                            // return services.get('technicians', 'maploader');
                         }
                     }
                 })

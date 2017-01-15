@@ -7,7 +7,7 @@
   include(UTILS . "utils.inc.php");
   include(UTILS . "common.inc.php");
   include(UTILS . "mail.inc.php");
-  include GENERAL_LOG_DIR;
+  // include GENERAL_LOG_DIR;
 
   if(PRODUCTION){
       ini_set('display_errors', '1');
@@ -37,7 +37,7 @@
       }else{
           $URI_function = 'begin';
       }
-      handlermodule($URI_module, $URI_function);
+      handlerModule($URI_module, $URI_function);
   }//End handleRouter
 
   function handlerModule($URI_module, $URI_function) {
@@ -60,9 +60,10 @@
             // echo $obj;
   				} else {
             echo json_encode($obj['error']=404);
+            // echo json_encode($obj['error']=HOLA);
   				}
           // echo $controllerClass.$URI_function ;
-	        handlerFunction(((String)$module->name), $obj, $URI_function);
+	        handlerFunction(((String) $module->name), $obj, $URI_function);
 	        break;
 	        }
 	    }

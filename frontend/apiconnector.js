@@ -9,8 +9,12 @@ app.factory("services", ['$http','$q', function ($http, $q) {
             $http({
                   method: 'GET',
                   url: serviceBase + module + '&function=' + functi
+                  // url: serviceBase + "technicians&function=maploader"
               }).success(function(data, status, headers, config) {
-                console.log("GET: "+data);
+                console.log('GET success: ');
+                console.log(data);
+                console.log(" config: ");
+                console.log(config);
                  defered.resolve(data);
               }).error(function(data, status, headers, config) {
                 console.log("ERROR GET"+data);
@@ -18,40 +22,44 @@ app.factory("services", ['$http','$q', function ($http, $q) {
               });
             return promise;
         };
-
-        obj.get = function (module, functi, dada) {
-            var defered=$q.defer();
-            var promise=defered.promise;
-            console.log("GET 2");
-            $http({
-                  method: 'GET',
-                  url: serviceBase + module + '&function=' + functi + '&param=' + dada
-              }).success(function(data, status, headers, config) {
-                 //console.log(data);
-                 defered.resolve(data);
-              }).error(function(data, status, headers, config) {
-                 defered.reject(data);
-              });
-            return promise;
-        };
-
-        obj.get = function (module, functi, dada, dada2) {
-            var defered=$q.defer();
-            var promise=defered.promise;
-            console.log("GET 3 module: "+module+ " function: "+functi+ " dada: "+dada+" dada2: "+dada2);
-            $http({
-                  method: 'GET',
-                  // url: serviceBase + module + '&function=' + functi + '&param=' + dada + '&param2=' + dada2
-                  url: serviceBase + module + '&function=' + functi
-              }).success(function(data, status, headers, config) {
-                 console.log('GET 3 success: '+data+" status: "+status+" headers: "+headers+" config: "+config);
-                 defered.resolve(data);
-              }).error(function(data, status, headers, config) {
-                 console.log('GET 3 error: '+data);
-                 defered.reject(data);
-              });
-            return promise;
-        };
+        //
+        // obj.get = function (module, functi, dada) {
+        //     var defered=$q.defer();
+        //     var promise=defered.promise;
+        //     console.log("GET 2");
+        //     $http({
+        //           method: 'GET',
+        //           url: serviceBase + module + '&function=' + functi + '&param=' + dada
+        //       }).success(function(data, status, headers, config) {
+        //          //console.log(data);
+        //          defered.resolve(data);
+        //       }).error(function(data, status, headers, config) {
+        //          defered.reject(data);
+        //       });
+        //     return promise;
+        // };
+        //
+        // obj.get = function (module, functi, dada, dada2) {
+        //     var defered=$q.defer();
+        //     var promise=defered.promise;
+        //     console.log("GET 3 module: "+module+ " function: "+functi+ " dada: "+dada+" dada2: "+dada2);
+        //     $http({
+        //           method: 'GET',
+        //           url: serviceBase + module + '&function=' + functi + '&param=' + dada + '&param2=' + dada2
+        //           // url: serviceBase + "technicians&function=maploader"
+        //       }).success(function(data, status, headers, config) {
+        //         //  console.log('GET 3 success: '+data+" status: "+status+" headers: "+headers+" config: "+config);
+        //          console.log('GET 3 success: ');
+        //          console.log(data);
+        //          console.log(" config: ");
+        //          console.log(config);
+        //          defered.resolve(data);
+        //       }).error(function(data, status, headers, config) {
+        //          console.log('GET 3 error: '+data);
+        //          defered.reject(data);
+        //       });
+        //     return promise;
+        // };
 
         obj.post = function (module, functi, dada) {
           var defered=$q.defer();

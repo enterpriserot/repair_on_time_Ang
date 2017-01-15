@@ -16,13 +16,14 @@
             <div id="demo">{{demo}}</div>
             <div id="mapholder"></div>
             <div class="ofertas" >
-                <div class="of"  ng-repeat="of in filteredTechnicians| filter:filtro" id="{{of.id}}">
-                    <div ng-click="select(of.id)">
-                        <div class="desc">{{of.descripcion}}</div>
-                        <div class="fecha"> Fecha: {{of.fecha_inicio}} - {{of.fecha_final}}</div>
+                <div class="of"  ng-repeat="tech in filteredTechnicians| filter:filtro" id="{{tech.id}}">
+                    <div ng-click="select(tech.id)">
+                        <div class="desc">{{tech.name}} {{tech.surname1}}</div>
+                        <div class="fecha"> Values: <p class="stars-container stars-{{tech.points/tech.val_qty}}"  > ★★★★★ </p></div>
+                        <!-- <div class="fecha"> Fecha: {{of.fecha_inicio}} - {{of.fecha_final}}</div>
                         <div class="hora"> Hora: {{of.hora_inicio}} - {{of.hora_final}}</div>
                         <div class="precio"> Precio: {{of.precio}} €</div>
-                        <div class="details" ><a href="#/technicians/{{of.id}}">Ver más</a></div>
+                        <div class="details" ><a href="#/technicians/{{of.id}}">Ver más</a></div> -->
                     </div>
                 </div>
                 <div id="pager">
