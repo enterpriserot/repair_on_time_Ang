@@ -12,13 +12,13 @@ app.factory("cookiesService", ['$cookies', 'localstorageService',
 
         function SetCredentials(user) {
             //encriptar data
-            var usuario = Base64_encode(user.usuario);
-            var tipo = Base64_encode(user.tipo);
-            var nombre = Base64_encode(user.nombre);
+            var email = Base64_encode(user.email);
+            var type = Base64_encode(user.type);
+            var name = Base64_encode(user.name);
 
             //almacenarlos en la cookie session
             $cookies.putObject("session",
-            {usuario: usuario, avatar: user.avatar, tipo: tipo, nombre: nombre},
+            {email: email, avatar: user.avatar, type: tipo, name: name},
             {expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)});
 
             //almacenarlos en localstorage
@@ -49,17 +49,17 @@ app.factory("cookiesService", ['$cookies', 'localstorageService',
         }
 
         function GetCredentials_encode(user) {
-            var usuario = Base64_encode(user.usuario);
-            var tipo = Base64_encode(user.tipo);
-            var nombre = Base64_encode(user.nombre);
-            return {usuario: usuario, avatar: user.avatar, tipo: tipo, nombre: nombre};
+            var email = Base64_encode(user.email);
+            var type = Base64_encode(user.type);
+            var name = Base64_encode(user.name);
+            return {email: email, avatar: user.avatar, type: tipo, name: name};
         }
 
         function GetCredentials_decode() {
-            var usuario = Base64_decode($cookies.getObject("session").usuario);
-            var tipo = Base64_decode($cookies.getObject("session").tipo);
-            var nombre = Base64_decode($cookies.getObject("session").nombre);
-            return {usuario: usuario, avatar: $cookies.getObject("session").avatar, tipo: tipo, nombre: nombre};
+            var email = Base64_decode($cookies.getObject("session").email);
+            var type = Base64_decode($cookies.getObject("session").type);
+            var name = Base64_decode($cookies.getObject("session").name);
+            return {email: email, avatar: $cookies.getObject("session").avatar, type: type, name: name};
         }
 
         function Base64_encode(input) {

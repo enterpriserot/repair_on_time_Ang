@@ -104,10 +104,10 @@ app.config(['$routeProvider',
                 .otherwise("/", {templateUrl: "frontend/modules/main/view/main.view.html", controller: "mainCtrl"});
     }]);
 
-// app.config([
-//     'FacebookProvider',
-//     function (FacebookProvider) {
-//         var myAppId = '679649702209590';
-//         FacebookProvider.init(myAppId);
-//     }
-// ]);
+app.config([
+    'FacebookProvider',
+    function (FacebookProvider) {
+        var myAppId = '679649702209590';
+        FacebookProvider.init(myAppId);
+    }
+]);

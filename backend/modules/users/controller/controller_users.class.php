@@ -2,22 +2,28 @@
 // echo json_encode("controller users");
 // exit;
 	class controller_users {
-		// echo "controller_users entra";
 
 		public function __construct(){
 			// echo FUNCTIONS_USERS . "functions_users.inc.php";
 				include(FUNCTIONS_USERS . "functions_users.inc.php");
 				include(LIBS . 'password_compat-master/lib/password.php');
 				include(UTILS . "upload.inc.php");
+				require_once(LIBS . 'twitteroauth/twitteroauth.php');
 				// include LOG_DIR;
 				$_SESSION['module'] = "users";
 		}
 
-		//////////////begin signup////////////
-		function signup() {
-			loadView('modules/users/view/'.'signup.php');
-		}
+		// function signup() {
+		// 	loadView('modules/users/view/'.'signup.php');
+		// }
 
+		/**
+     * Create a new user
+     *
+     * @param mixed[] $userJSON with the user info to be created
+     *
+     * @return mixed[] returns array['success']=boolean with the result confirmation, if false returns array['typeErr']=string and array['error']=string with the error info too.
+     */
 		public function signup_user() {
 				$jsondata = array();
 				$userJSON = json_decode($_POST['signup_user_json'], true);
@@ -65,27 +71,29 @@
 
                 if ($arrValue) {
                     sendtoken($arrArgument, "alta");
-                    $url = amigable('?module=main&function=begin&param=reg', true);
+                    // $url = amigable('?module=main&function=begin&param=reg', true);
                     $jsondata["success"] = true;
-                    $jsondata["redirect"] = $url;
+                    // $jsondata["redirect"] = $url;
                     echo json_encode($jsondata);
                     exit;
                 } else {
-                    $url = amigable('?module=main&function=begin&param=503', true);
-                    $jsondata["success"] = true;
-                    $jsondata["redirect"] = $url;
+                    // $url = amigable('?module=main&function=begin&param=503', true);
+                    $jsondata["success"] = false;
+										$jsondata["typeErr"] = "error_server";
+                    // $jsondata["redirect"] = $url;
                     echo json_encode($jsondata);
+										exit;
                 }
             } else {
                 $jsondata["success"] = false;
-                $jsondata['typeErr'] = $typeErr;
-                $jsondata["error"] = $error;
+                $jsondata['typeErr'] = "error_server";
                 echo json_encode($jsondata);
             }
 
 			} else {
             $jsondata["success"] = false;
-            $jsondata['data'] = $result;
+						$jsondata['typeErr'] = "error";
+            $jsondata['error'] = $result;
             echo json_encode($jsondata);
         }
 		}
@@ -105,21 +113,30 @@
             } catch (Exception $e) {
                 $value = false;
             }
-            restore_error_handler();
 
             if ($value) {
-                loadView('modules/main/view/', 'main.php');
-            } else {
-                showErrorPage(1, "", 'HTTP/1.0 503 Service Unavailable', 503);
+							$arrArgument = array(
+									'column' => array("token"),
+									'like' => array($_GET['param']),
+									'field' => array('*')
+							);
+							$user = loadModel(MODEL_USER, "users_model", "select", $arrArgument);
+                $json['user'] = $user;
+                $json['success'] = true;
+                echo json_encode($json);
+                exit();
             }
+
+						restore_error_handler();
+						echo json_encode($json);
         }
     }
 		////////////////end signup////////////
 
 		///////////////profile///////////////
-		function profile() {
-        loadView('modules/users/view/', 'profile.php');
-    }
+		// function profile() {
+    //     loadView('modules/users/view/', 'profile.php');
+    // }
 
     function upload_avatar() {
         $result_avatar = upload_files();
@@ -374,22 +391,28 @@
         }
     }///end process_restore////
 
-		function changepass() {
-        if (substr($_GET['param'], 0, 3) == "Cha") {
-            loadView('modules/users/view/', 'changepass.php');
-        } else {
-            showErrorPage(1, "", 'HTTP/1.0 503 Service Unavailable', 503);
-        }
-    }
-
+		// function changepass() {
+    //     if (substr($_GET['param'], 0, 3) == "Cha") {
+    //         loadView('modules/users/view/', 'changepass.php');
+    //     } else {
+    //         showErrorPage(1, "", 'HTTP/1.0 503 Service Unavailable', 503);
+    //     }
+    // }
+		/**
+     * Change the user's password
+     *
+     * @param string $_POST['json'] Json filled with the new password and the token.
+     *
+     * @return mixed[] returns array['success']=boolean with the result confirmation
+     */
 		function update_pass() {
-        $jsondata = array();
-        $pass = json_decode($_POST['passw'], true);
+        // $jsondata = array();
+        // $pass = json_decode($_POST['passw'], true);
         $arrArgument = array(
             'column' => array('token'),
-            'like' => array($pass['token']),
+            'like' => array($_POST['token']),
             'field' => array('password'),
-            'new' => array(password_hash($pass['password'], PASSWORD_BCRYPT))
+            'new' => array(password_hash($_POST['password'], PASSWORD_BCRYPT))
         );
 
         set_error_handler('ErrorHandler');
@@ -401,15 +424,11 @@
         restore_error_handler();
 
         if ($value) {
-            $url = amigable('?module=main&function=begin&param=rest', true);
             $jsondata["success"] = true;
-            $jsondata["redirect"] = $url;
             echo json_encode($jsondata);
             exit;
         } else {
-            $url = amigable('?module=main&function=begin&param=503', true);
             $jsondata["success"] = true;
-            $jsondata["redirect"] = $url;
             echo json_encode($jsondata);
             exit;
         }
@@ -510,14 +529,16 @@
 		////////////////////////////////////////////////////begin social///////////////////////////////////////////
     function social_signin() { //utilitzada per Facebook i Twitter
 
-        $user = json_decode($_POST['user'], true);
+				$user = $_POST;
+        // $user = json_decode($_POST['user'], true);
 				// echo json_encode("Dins social_signin: ".$user['email']);
 				// exit;
-        // if ($user['twitter']) {
-        //     $user['apellidos'] = "";
-        //     $user['email'] = "";
-        //     $mail = $user['user_id'] . "@gmail.com";
-        // }
+        if ($user['twitter']) {
+            $user['surnames'] = "";
+            $user['email'] = $user['user_id'];
+            $mail = $user['user_id'] . "@gmail.com";
+        }
+
         set_error_handler('ErrorHandler');
         try {
             $arrValue = loadModel(MODEL_USERS, "users_model", "count", array('column' => array('email'), 'like' => array($user['email'])));
@@ -531,10 +552,10 @@
 				// exit;
         if (!$arrValue[0]["total"]) {
 
-            if ($user['email'])
-                $avatar = 'https://graph.facebook.com/' . ($user['email']) . '/picture';
-            else
-                $avatar = get_gravatar($mail, $s = 400, $d = 'identicon', $r = 'g', $img = false, $atts = array());
+            if (!$user['avatar'])
+                $user['avatar'] = 'https://graph.facebook.com/' . ($user['email']) . '/picture';
+            // else
+            //     $avatar = get_gravatar($mail, $s = 400, $d = 'identicon', $r = 'g', $img = false, $atts = array());
 
 						// echo json_encode("if arrValue: ".$avatar);
 						// exit;
@@ -544,7 +565,7 @@
                 'surnames' => $user['surnames'],
                 // 'email' => $user['email'],
                 'type' => 'client',
-                'avatar' => $avatar,
+                'avatar' => $user['avatar'],
                 'active' => "1"
             );
 						// echo json_encode("Array: ".$arrArgument['user']);

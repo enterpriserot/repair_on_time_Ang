@@ -272,13 +272,13 @@ class inputfilter {
         // url decode
         $source = html_entity_decode($source, ENT_QUOTES, "ISO-8859-1");
         // convert decimal
-        // $source = preg_replace('/&#(\d+);/m', "chr(\\1)", $source);    // decimal notation
+        // $source = preg_replace('/&#(\d+);/me', "chr(\\1)", $source);    // decimal notation
         $source = preg_replace_callback('/&#(\d+);/m',
             function($matches) { return $this->chr($matches[1]); },
             $source
         );
         // convert hex
-        // $source = preg_replace('/&#x([a-f0-9]+);/mi', "chr(0x\\1)", $source); // hex notation
+        // $source = preg_replace('/&#x([a-f0-9]+);/mei', "chr(0x\\1)", $source); // hex notation
         $source = preg_replace_callback('/&#x([a-f0-9]+);/mi',
             function($matches) { return $this->chr($matches[1]); },
             $source

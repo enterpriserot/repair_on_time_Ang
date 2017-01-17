@@ -1,0 +1,37 @@
+<br><br>
+<p><h2>New user:</h2></p>
+ <div class="status alert alert-success" style="display: none"></div>
+<form name="formusers" id="formusers" class="formusers" novalidate>
+    <br>
+      <p>
+         <label for="name">Name:</label>
+         <input ng-model="signup.inputName"  type="text" name="inputName" id="inputName" required ng-pattern="/^\D{3,30}$/" placeholder="Name" ng-change="change_signup()"/>
+         <span class="styerror" ng-show="formusers.inputName.$error.required && (formusers.inputName.$dirty || formusers.inputName.$touched)">El campo es obligatorio</span>
+         <span class="styerror" ng-show="formusers.inputName.$error.pattern">Nombre no válido</span><br />
+         <span class="styerror" ng-show="AlertMessage" ng-model="signup.name_error">{{signup.name_error}}</span>
+      </p>
+      <p>
+        <label for="email">e-mail:</label>
+        <input type="email" name="inputEmail" id="inputEmail" required ng-model="signup.inputEmail" placeholder="email" ng-pattern="/^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*$/i" ng-change="change_signup()"/>
+        <span class="styerror" ng-show="formusers.inputEmail.$error.required && (formusers.inputEmail.$dirty || formusers.inputEmail.$touched)">El campo es obligatorio</span>
+        <span class="styerror" ng-show="formusers.inputEmail.$error.email">Email no valido</span>
+        <span class="styerror" ng-show="AlertMessage" ng-model="signup.email_error">{{signup.email_error}}</span>
+      </p>
+      <p>
+        <label for="password">Password:</label>
+  		  <input type="password" name="inputPass" id="inputPass" required ng-model="signup.inputPass" placeholder="Password" ng-pattern="/^.{6,12}$/" ng-change="change_signup()"/>
+        <span class="styerror" ng-show="formusers.inputPass.$error.required && (formusers.inputPass.$dirty || formusers.inputPass.$touched)">El campo es obligatorio</span>
+        <span class="styerror" ng-show="formusers.inputPass.$error.pattern">Passwd no válido</span><br />
+        <span class="styerror" ng-show="AlertMessage" ng-model="signup.pass_error">{{signup.pass_error}}</span>
+      </p>
+      <p>
+        <label for="password2">Repeat password:</label>
+        <input type="password" name="inputPass2" id="inputPass2" required ng-modal="signup.inputPass2" placeholder="Repeat password" ng-change="change_signup()"/>
+        <span id="error_password2" class="styerror"></span>
+        <span class="styerror" ng-show="formusers.inputPass2.$error.required && (formusers.inputPass2.$dirty || formusers.inputPass2.$touched)">El campo es obligatorio</span>
+        <span class="styerror" data-ng-show="signup.inputPass !== signup.inputPass2"> Password do not match</span>
+      </p>
+      <input type="button" class="btn btn-primary" name="submit_user" id="submit_user" value="Submit" ng-show="formusers.inputName.$valid && formusers.inputEmail.$valid && formusers.inputPass.$valid && formusers.inputPass2.$valid && signup.inputPass === signup.inputPass2" ng-click="SubmitSignUp()"/>
+</form>
+<!-- <link rel="stylesheet" href="<?php echo USERS_CSS_PATH ?>users.css">
+<script src="<?php echo USERS_JS_PATH; ?>signup.js"></script> -->

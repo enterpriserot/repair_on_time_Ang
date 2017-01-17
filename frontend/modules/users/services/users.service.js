@@ -14,12 +14,12 @@ function ($location, $rootScope, services, facebookService, cookiesService, twit
                 $rootScope.logoutV = true;
 
                 $rootScope.avatar = user.avatar;
-                $rootScope.nombre = user.nombre;
+                $rootScope.name = user.name;
 
-                if (user.tipo === "client") {
+                if (user.type === "client") {
                     $rootScope.adminV = false;
                     $rootScope.misofertasV = true;
-                } else if (user.tipo === "admin") {
+                } else if (user.type === "admin") {
                     $rootScope.adminV = true;
                     $rootScope.misofertasV = false;
                 } else {
@@ -27,7 +27,7 @@ function ($location, $rootScope, services, facebookService, cookiesService, twit
                     $rootScope.misofertasV = false;
                 }
             } else {
-                $rootScope.accederV = true;
+                $rootScope.accessV = true;
             }
         }
 

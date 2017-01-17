@@ -1,3 +1,7 @@
+/**
+ * Angular controller for menu (menuCtrl)
+ *
+ */
 app.controller('menuCtrl', function ($scope, $uibModal, UserService, $rootScope, $anchorScroll) {
     UserService.login();
     $rootScope.bannerV = false;
@@ -6,7 +10,7 @@ app.controller('menuCtrl', function ($scope, $uibModal, UserService, $rootScope,
     $scope.open = function () {
         var modalInstance = $uibModal.open({
             animation: 'true',
-            templateUrl: 'frontend/modules/user/view/modal.view.html',
+            templateUrl: 'frontend/modules/users/view/modal.view.html',
             controller: 'modalWindowCtrl',
             size: "lg"
         });
@@ -41,7 +45,7 @@ app.controller('modalWindowCtrl', function ($scope, $uibModalInstance, services,
         var data = {"usuario": $scope.form.user, "pass": $scope.form.pass};
         data = JSON.stringify(data);
 
-        services.post("user", "login", data).then(function (response) {
+        services.post("users", "login", data).then(function (response) {
             //console.log(response);
             //console.log(response[0].usuario);
             if (!response.error) {
@@ -72,7 +76,7 @@ app.controller('modalWindowCtrl', function ($scope, $uibModalInstance, services,
             if (twitterService.isReady()) {
                 twitterService.getUserInfo().then(function (data) {
                     //console.log(data);
-                    services.post("user", 'social_signin', {id: data.id, nombre: data.name, avatar: data.profile_image_url_https, twitter: true})
+                    services.post("users", 'social_signin', {id: data.id, name: data.name, avatar: data.profile_image_url_https, twitter: true})
                     .then(function (response) {
                         //console.log(response[0]);
                         if (!response.error) {
@@ -95,7 +99,7 @@ app.controller('modalWindowCtrl', function ($scope, $uibModalInstance, services,
                 if (user.error){
                     $scope.close();
                 }else{
-                    services.post("user", 'social_signin', {id: user.id, nombre: user.first_name, apellidos: user.last_name, email: user.email})
+                    services.post("user", 'social_signin', {id: user.id, name: user.first_name, surname: user.last_name, email: user.id})
                     .then(function (response) {
                         //console.log(response);
                         //console.log(response[0]['usuario']);
@@ -116,50 +120,34 @@ app.controller('modalWindowCtrl', function ($scope, $uibModalInstance, services,
 
 app.controller('signupCtrl', function ($scope, services, $location, $timeout, CommonService) {
     $scope.signup = {
-        inputUser: "",
         inputName: "",
-        inputSurn: "",
         inputEmail: "",
         inputPass: "",
         inputPass2: "",
-        inputBirth: "",
         inputType: "client",
-        inputBank: "",
-        inputDni: ""
     };
 
     $scope.error = function() {
-        $scope.signup.user_error = "";
         $scope.signup.email_error = "";
-        $scope.signup.nombre_error = "";
-        $scope.signup.surn_error = "";
+        $scope.signup.name_error = "";
         $scope.signup.pass_error = "";
-        $scope.signup.birth_error = "";
-        $scope.signup.bank_error = "";
-        $scope.signup.dni_error = "";
     };
 
     $scope.change_signup = function () {
-        $scope.signup.user_error = "";
         $scope.signup.email_error = "";
-        $scope.signup.nombre_error = "";
-        $scope.signup.surn_error = "";
+        $scope.signup.name_error = "";
         $scope.signup.pass_error = "";
-        $scope.signup.birth_error = "";
-        $scope.signup.bank_error = "";
-        $scope.signup.dni_error = "";
     };
 
-    $('.modal').remove();
-    $('.modal-backdrop').remove();
-    $("body").removeClass("modal-open");
+    // $('.modal').remove();
+    // $('.modal-backdrop').remove();
+    // $("body").removeClass("modal-open");
 
     $scope.SubmitSignUp = function () {
-        var data = {"usuario": $scope.signup.inputUser, "nombre": $scope.signup.inputName, "apellidos": $scope.signup.inputSurn, "email": $scope.signup.inputEmail,
-            "password": $scope.signup.inputPass, "password2": $scope.signup.inputPass2, "date_birthday": $scope.signup.inputBirth, "tipo": $scope.signup.inputType,
-            "bank": $scope.signup.inputBank, "dni": $scope.signup.inputDni};
+        var data = {"name": $scope.signup.inputName, "email": $scope.signup.inputEmail,
+            "password": $scope.signup.inputPass, "password2": $scope.signup.inputPass2, "type": $scope.signup.inputType};
         var data_users_JSON = JSON.stringify(data);
-        services.post('user', 'signup_user', data_users_JSON).then(function (response) {
+        services.post('users', 'signup_user', data_users_JSON).then(function (response) {
             //console.log(response);
             if (response.success) {
                 $timeout(function () {
@@ -167,14 +155,7 @@ app.controller('signupCtrl', function ($scope, services, $location, $timeout, Co
                     CommonService.banner("El usuario se ha dado de alta correctamente, revisa su correo para activarlo", "");
                 }, 2000);
             } else {
-                if (response.typeErr === "Name") {
-                    $scope.AlertMessage = true;
-                    $timeout(function () {
-                        $scope.AlertMessage = false;
-                    }, 5000);
-                    $scope.signup.user_error = response.error;
-
-                } else if (response.typeErr === "Email") {
+                if (response.typeErr === "Email") {
                     $scope.AlertMessage = true;
                     $timeout(function () {
                         $scope.AlertMessage = false;
@@ -187,14 +168,9 @@ app.controller('signupCtrl', function ($scope, services, $location, $timeout, Co
                     $timeout(function () {
                         $scope.AlertMessage = false;
                     }, 5000);
-                    $scope.signup.user_error = response.error.usuario;
                     $scope.signup.email_error = response.error.email;
-                    $scope.signup.nombre_error = response.error.nombre;
-                    $scope.signup.surn_error = response.error.apellidos;
+                    $scope.signup.nombre_error = response.error.name;
                     $scope.signup.pass_error = response.error.password;
-                    $scope.signup.birth_error = response.error.date_birthday;
-                    $scope.signup.bank_error = response.error.bank;
-                    $scope.signup.dni_error = response.error.dni;
                 } else if (response.typeErr === "error_server"){
                     CommonService.banner("Error en el servidor", "Err");
                 }
@@ -209,7 +185,7 @@ app.controller('verifyCtrl', function (UserService, $location, CommonService, $r
         CommonService.banner("Ha habido algún tipo de error con la dirección", "Err");
         $location.path('/');
     }
-    services.get("user", "activar", token).then(function (response) {
+    services.get("users", "verify", token).then(function (response) {
         //console.log(response);
         //console.log(response.user[0].usuario);
         if (response.success) {
@@ -242,7 +218,7 @@ app.controller('restoreCtrl', function ($scope, services, $timeout, $location, C
         var data = {"inputEmail": $scope.restore.inputEmail, "token": 'restore_form'};
         var restore_form = JSON.stringify(data);
 
-        services.post('user', 'process_restore', restore_form).then(function (response) {
+        services.post('users', 'process_restore', restore_form).then(function (response) {
             //console.log(response);
             response = response.split("|");
             $scope.message = response[1];
@@ -273,7 +249,7 @@ app.controller('changepassCtrl', function ($route, $scope, services, $location, 
         var data = {"password": $scope.changepass.inputPassword, "token": $scope.token};
         var passw = JSON.stringify(data);
 
-        services.put('user', 'update_pass', passw).then(function (response) {
+        services.put('users', 'update_pass', passw).then(function (response) {
             //console.log(response);
             if (response.success) {
                 $location.path('/');
@@ -401,7 +377,7 @@ load_pais_prov_poblac, $timeout, cookiesService) {
     //dropzone
     $scope.dropzoneConfig = {
         'options': {
-            'url': 'backend/index.php?module=user&function=upload_avatar',
+            'url': 'backend/index.php?module=users&function=upload_avatar',
             addRemoveLinks: true,
             maxFileSize: 1000,
             dictResponseError: "Ha ocurrido un error en el server",

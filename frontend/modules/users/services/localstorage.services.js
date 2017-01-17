@@ -2,7 +2,7 @@ app.factory("localstorageService", ['$timeout', '$filter', '$q', function ($time
         var service = {};
         service.GetAll = GetAll;
         service.GetById = GetById;
-        service.GetByUsername = GetByUsername;
+        service.GetByUseremail = GetByUseremail;
         service.Create = Create;
         service.Update = Update;
         service.Delete = Delete;
@@ -26,14 +26,14 @@ app.factory("localstorageService", ['$timeout', '$filter', '$q', function ($time
             return deferred.promise;
         }
 
-        function GetByUsername(usuario) {
+        function GetByUseremail(email) {
             var deferred = $q.defer();
-            var filtered = $filter('filter')(getUsers(), { usuario: usuario });
+            var filtered = $filter('filter')(getUsers(), { email: email });
             var user = filtered.length ? filtered[0] : null;
             if(user === null){
-                deferred.resolve({ success: false, message: 'GetByUsername error', data: null });
+                deferred.resolve({ success: false, message: 'GetByUseremail error', data: null });
             }else{
-                deferred.resolve({ success: true, message: 'GetByUsername success', data: user });
+                deferred.resolve({ success: true, message: 'GetByUseremail success', data: user });
             }
             return deferred.promise;
         }
@@ -41,7 +41,7 @@ app.factory("localstorageService", ['$timeout', '$filter', '$q', function ($time
         function Create(user) {
             var deferred = $q.defer();
             $timeout(function () {
-                GetByUsername(user.usuario)
+                GetByUseremail(user.email)
                     .then(function () {
                         var users = getUsers();
                         // assign id
@@ -94,7 +94,7 @@ app.factory("localstorageService", ['$timeout', '$filter', '$q', function ($time
             }
             return JSON.parse(localStorage.users);
         }
-        
+
         function setUsers(users) {
             localStorage.users = JSON.stringify(users);
         }
